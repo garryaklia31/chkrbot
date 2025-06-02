@@ -20,7 +20,8 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     file_path = f"/tmp/{document.file_name}"
-    await document.get_file().download_to_drive(file_path)
+    file = await document.get_file()
+    await file.download_to_drive(file_path)
     await update.message.reply_text("Checking emails, please wait...")
 
     result_text = check_emails_from_file(file_path)
